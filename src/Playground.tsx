@@ -28,7 +28,12 @@ function Playground() {
         rangeType="closest"
         percentage={percentage}
       /> */}
-      <SemiCircularProgressBar canvasWidth={700} />
+      <SemiCircularProgressBar
+        activeBarStyle={{ color: "red", offset: 10 }}
+        backgroundBarStyle={{ color: "gray", width: 30 }}
+        canvasWidth={700}
+        percentage={20}
+      />
     </>
   );
 }

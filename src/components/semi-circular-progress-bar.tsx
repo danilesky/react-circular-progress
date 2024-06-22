@@ -1,19 +1,31 @@
-import { ReactElement } from "react";
+import { ReactElement, SVGProps } from "react";
 
 interface SemiCircularProgressBarProps {
   canvasWidth: number;
+  percentage: number;
+  backgroundBarStyle?: {
+    color?: string;
+    width?: number;
+    variant?: SVGProps<SVGSVGElement>["strokeLinecap"];
+  };
+  activeBarStyle?: {
+    offset?: number;
+    color?: string;
+    variant?: SVGProps<SVGSVGElement>["strokeLinecap"];
+  };
 }
 
 export function SemiCircularProgressBar({
   canvasWidth,
+  percentage,
+  activeBarStyle,
+  backgroundBarStyle,
 }: SemiCircularProgressBarProps): ReactElement {
-  const strokeWidth = 30;
-
+  const strokeWidth = backgroundBarStyle?.width ?? 30;
   const width = canvasWidth;
   const height = width / 2 + strokeWidth / 2;
 
   const radius = width / 2 - strokeWidth / 2;
-
   // Half circle circumference
   const circumference = Math.PI * radius;
 
@@ -24,17 +36,50 @@ export function SemiCircularProgressBar({
     arc: `a 1 1 0 0 1 ${width - strokeWidth} 0`,
   };
 
+  function percentageToOffset(percentage: number) {
+    let percentual = percentage;
+    if (percentual < 0) {
+      percentual = 0;
+    }
+    if (percentual > 100) {
+      percentual = 100;
+    }
+    return (circumference - (percentual / 100) * circumference).toString();
+  }
+
   return (
     <svg width={width} height={height}>
       <path
-        d={`${drawing.MOVE} ${drawing.arc}`}
+        d={`
+          ${drawing.MOVE} 
+          ${drawing.arc}
+        `}
         style={{
-          transition: "stroke-dashoffset 0.35s",
-          stroke: "#04001b",
-          strokeLinecap: "round",
+          transition: "stroke-dashoffset 0.3s",
+          stroke: backgroundBarStyle?.color ?? "#000000",
+          strokeLinecap: backgroundBarStyle?.variant ?? "round",
           strokeDasharray: `${circumference}`,
-          strokeDashoffset: `${circumference - 1 * circumference}`,
+          strokeDashoffset: percentageToOffset(100),
           strokeWidth: `${strokeWidth}`,
+        }}
+        fill="none"
+      />
+      <path
+        d={`
+          ${drawing.MOVE} 
+          ${drawing.arc}
+        `}
+        style={{
+          transition: "stroke-dashoffset 0.3s",
+          stroke: activeBarStyle?.color ?? "#000000",
+          strokeLinecap: activeBarStyle?.variant ?? "round",
+          strokeDasharray: `${circumference}`,
+          strokeDashoffset: percentageToOffset(percentage),
+          strokeWidth: `${
+            activeBarStyle?.offset
+              ? strokeWidth - activeBarStyle.offset
+              : strokeWidth
+          }`,
         }}
         fill="none"
       />
