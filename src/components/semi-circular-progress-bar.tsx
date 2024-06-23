@@ -111,9 +111,7 @@ function SemiCircularProgressBar({
     <svg width={width} height={height} overflow={overflow}>
       {backgroundBar && (
         <path
-          d={`
-          ${drawing.MOVETO} 
-          ${drawing.arc}
+          d={`${drawing.MOVETO} ${drawing.arc}
         `}
           style={{
             stroke: backgroundBar?.color ?? "#000000",
@@ -129,10 +127,7 @@ function SemiCircularProgressBar({
       )}
       {activeBar && (
         <path
-          d={`
-          ${drawing.MOVETO} 
-          ${drawing.arc}
-        `}
+          d={`${drawing.MOVETO} ${drawing.arc}`}
           style={{
             stroke: activeBar?.color ?? "#000000",
             strokeLinecap: activeBar?.variant ?? "round",
