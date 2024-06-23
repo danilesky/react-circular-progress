@@ -88,6 +88,7 @@ export function SemiCircularProgressBar({
           return true;
         }
       }
+      return true;
     }
     return false;
   }
@@ -143,7 +144,7 @@ export function SemiCircularProgressBar({
           fill="none"
         />
       )}
-      {!isCircleHidden() && (
+      {isCircleHidden() && (
         <circle
           cx={circleCoordinates.x}
           cy={circleCoordinates.y}

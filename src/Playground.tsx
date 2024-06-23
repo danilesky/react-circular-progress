@@ -19,7 +19,7 @@ function Playground() {
         rectangleOptions={{
           width: 4,
           height: 8,
-          count: 27,
+          count: 40,
           colors: {
             fill: "gray",
             activeFill: "blue",
@@ -29,19 +29,11 @@ function Playground() {
         percentage={percentage}
       />
       <SemiCircularProgressBar
+        barWidth={40}
         activeBar={{
           color: "#246CF9",
         }}
-        backgroundBar={{
-          color: "#3C4254",
-          shadow: "0px 0px 15px #246CF9",
-        }}
-        circle={{
-          radius: 5,
-          color: "white",
-          hidable: true,
-        }}
-        canvasWidth={700}
+        canvasWidth={200}
         percentage={percentage}
         overflow="visible"
       />
