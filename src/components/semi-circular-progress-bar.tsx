@@ -1,18 +1,18 @@
 import { ReactElement, SVGProps } from "react";
 
-interface IActivebar {
+interface ActivebarProps {
   offset?: number;
   color?: string;
   variant?: SVGProps<SVGSVGElement>["strokeLinecap"];
 }
 
-interface ICircle {
+interface CircleProps {
   color?: string;
   borderColor?: string;
   borderWidth?: number;
 }
 
-interface IBackroundBar {
+interface BackroundBarProps {
   color?: string;
   variant?: SVGProps<SVGSVGElement>["strokeLinecap"];
 }
@@ -21,9 +21,9 @@ interface SemiCircularProgressBarProps {
   canvasWidth: number;
   percentage: number;
   barWidth?: number;
-  backgroundBar?: IBackroundBar;
-  activeBar?: IActivebar;
-  circle?: ICircle;
+  backgroundBar?: BackroundBarProps;
+  activeBar?: ActivebarProps;
+  circle?: CircleProps;
 }
 
 export function SemiCircularProgressBar({
