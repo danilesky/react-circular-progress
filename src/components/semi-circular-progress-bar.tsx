@@ -11,6 +11,7 @@ interface CircleProps {
   borderColor?: string;
   borderWidth?: number;
   radius?: number;
+  hidable?: boolean;
 }
 
 interface BackroundBarProps {
@@ -25,6 +26,7 @@ interface SemiCircularProgressBarProps {
   backgroundBar?: BackroundBarProps;
   activeBar?: ActivebarProps;
   circle?: CircleProps;
+  overflow?: "hidden" | "visible";
 }
 
 export function SemiCircularProgressBar({
@@ -34,6 +36,7 @@ export function SemiCircularProgressBar({
   activeBar,
   backgroundBar,
   circle,
+  overflow,
 }: SemiCircularProgressBarProps): ReactElement {
   const strokeWidth = barWidth ?? 30;
   const halfStrokeWidth = strokeWidth / 2;
@@ -73,6 +76,20 @@ export function SemiCircularProgressBar({
   const circleRadius = circle?.radius ?? strokeWidth / 2;
   const circleCoordinates = getCircleCoordinates();
 
+  function isCircleHidden() {
+    if (circle) {
+      if (circle?.hidable) {
+        if (percentage <= 0) {
+          return true;
+        }
+        if (percentage >= 100) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   function getCircleCoordinates() {
     const angle = (percentage / 100) * 180;
     const radian = (angle * Math.PI) / 180;
@@ -88,7 +105,7 @@ export function SemiCircularProgressBar({
   }
 
   return (
-    <svg width={width} height={height}>
+    <svg width={width} height={height} overflow={overflow}>
       {backgroundBar && (
         <path
           d={`
@@ -101,6 +118,7 @@ export function SemiCircularProgressBar({
             strokeDasharray: `${circumference}`,
             strokeDashoffset: `${percentageToOffset(100)}`,
             strokeWidth: `${strokeWidth}`,
+            filter: "drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))",
           }}
           fill="none"
         />
@@ -121,7 +139,7 @@ export function SemiCircularProgressBar({
           fill="none"
         />
       )}
-      {circle && (
+      {!isCircleHidden() && (
         <circle
           cx={circleCoordinates.x}
           cy={circleCoordinates.y}

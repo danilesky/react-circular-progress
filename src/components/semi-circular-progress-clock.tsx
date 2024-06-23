@@ -22,14 +22,15 @@ interface SemiCircularProgressClockProps {
     };
   };
   canvasWidth: number;
+  overflow?: "hidden" | "visible";
 }
 
 function SemiCircularProgressClock({
   rangeType = "closest",
   percentage,
-
   canvasWidth,
   rectangleOptions,
+  overflow,
 }: SemiCircularProgressClockProps): ReactElement {
   const width = canvasWidth;
   const height = width / 2 + rectangleOptions.height;
@@ -136,7 +137,7 @@ function SemiCircularProgressClock({
   }
 
   return (
-    <svg width={width} height={height}>
+    <svg width={width} height={height} overflow={overflow}>
       {rectangles.map(function (rect, index) {
         return (
           <rect

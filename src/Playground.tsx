@@ -34,9 +34,11 @@ function Playground() {
         circle={{
           radius: 5,
           color: "white",
+          hidable: true,
         }}
         canvasWidth={700}
         percentage={percentage}
+        overflow="visible"
       />
     </>
   );
