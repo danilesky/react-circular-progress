@@ -6,14 +6,14 @@ function Playground() {
   const [percentage, setPercentage] = useState(0);
   return (
     <>
-      {/* <input
+      <input
         type="range"
         name="percentage"
         id="percentage"
         onChange={(e) => setPercentage(Number(e.target.value))}
         min="0"
         max="100"
-      /> */}
+      />
       {/* <SemiCircularProgressClock
         canvasWidth={400}
         rectangleOptions={{
@@ -29,10 +29,10 @@ function Playground() {
         percentage={percentage}
       /> */}
       <SemiCircularProgressBar
-        activeBarStyle={{ color: "red", offset: 10 }}
-        backgroundBarStyle={{ color: "gray", width: 30 }}
+        activeBarStyle={{ color: "blue", offset: 10 }}
+        backgroundBarStyle={{ color: "gray" }}
         canvasWidth={700}
-        percentage={20}
+        percentage={percentage}
       />
     </>
   );
