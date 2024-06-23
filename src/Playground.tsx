@@ -29,8 +29,11 @@ function Playground() {
         percentage={percentage}
       /> */}
       <SemiCircularProgressBar
-        activeBarStyle={{ color: "blue", offset: 10 }}
-        backgroundBarStyle={{ color: "gray" }}
+        activeBar={{ color: "blue", offset: 10 }}
+        backgroundBar={{ color: "grey" }}
+        circle={{
+          color: "white",
+        }}
         canvasWidth={700}
         percentage={percentage}
       />
