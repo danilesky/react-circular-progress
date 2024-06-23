@@ -1,9 +1,16 @@
 import { ReactElement, SVGProps } from "react";
 
+interface BackroundBarProps {
+  color?: string;
+  variant?: SVGProps<SVGSVGElement>["strokeLinecap"];
+  shadow?: string;
+}
+
 interface ActivebarProps {
   offset?: number;
   color?: string;
   variant?: SVGProps<SVGSVGElement>["strokeLinecap"];
+  shadow?: string;
 }
 
 interface CircleProps {
@@ -12,11 +19,6 @@ interface CircleProps {
   borderWidth?: number;
   radius?: number;
   hidable?: boolean;
-}
-
-interface BackroundBarProps {
-  color?: string;
-  variant?: SVGProps<SVGSVGElement>["strokeLinecap"];
 }
 
 interface SemiCircularProgressBarProps {
@@ -118,7 +120,8 @@ export function SemiCircularProgressBar({
             strokeDasharray: `${circumference}`,
             strokeDashoffset: `${percentageToOffset(100)}`,
             strokeWidth: `${strokeWidth}`,
-            filter: "drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))",
+            filter:
+              backgroundBar?.shadow && `drop-shadow( ${backgroundBar.shadow})`,
           }}
           fill="none"
         />
@@ -135,6 +138,7 @@ export function SemiCircularProgressBar({
             strokeDasharray: `${circumference}`,
             strokeDashoffset: `${percentageToOffset(percentage)}`,
             strokeWidth: `${activeBarStrokeWidth}`,
+            filter: activeBar?.shadow && `drop-shadow( ${activeBar.shadow})`,
           }}
           fill="none"
         />

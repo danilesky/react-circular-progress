@@ -14,7 +14,7 @@ function Playground() {
         min="0"
         max="100"
       />
-      {/* <SemiCircularProgressClock
+      <SemiCircularProgressClock
         canvasWidth={400}
         rectangleOptions={{
           width: 4,
@@ -27,10 +27,15 @@ function Playground() {
         }}
         rangeType="closest"
         percentage={percentage}
-      /> */}
+      />
       <SemiCircularProgressBar
-        activeBar={{ color: "blue", offset: 10 }}
-        backgroundBar={{ color: "grey" }}
+        activeBar={{
+          color: "#246CF9",
+        }}
+        backgroundBar={{
+          color: "#3C4254",
+          shadow: "0px 0px 15px #246CF9",
+        }}
         circle={{
           radius: 5,
           color: "white",
