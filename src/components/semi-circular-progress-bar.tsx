@@ -41,7 +41,7 @@ export function SemiCircularProgressBar({
   const height = width / 2 + halfStrokeWidth;
 
   const radius = width / 2 - halfStrokeWidth;
-  // Half circle circumference
+  // Half circumference
   const circumference = Math.PI * radius;
 
   const drawing = {
@@ -55,9 +55,6 @@ export function SemiCircularProgressBar({
     ? strokeWidth - activeBar.offset
     : strokeWidth;
 
-  const circleRadius = activeBarStrokeWidth / 2;
-  const circleCoordinates = getCircleCoordinates();
-
   function percentageToOffset(percentage: number) {
     let percentual = percentage;
     if (percentual < 0) {
@@ -68,6 +65,12 @@ export function SemiCircularProgressBar({
     }
     return circumference - (percentual / 100) * circumference;
   }
+
+  /**
+   * Circle
+   */
+  const circleRadius = activeBarStrokeWidth / 2;
+  const circleCoordinates = getCircleCoordinates();
 
   function getCircleCoordinates() {
     const angle = (percentage / 100) * 180;
