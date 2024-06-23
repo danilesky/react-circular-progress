@@ -32,6 +32,7 @@ function Playground() {
         activeBar={{ color: "blue", offset: 10 }}
         backgroundBar={{ color: "grey" }}
         circle={{
+          radius: 5,
           color: "white",
         }}
         canvasWidth={700}

@@ -10,6 +10,7 @@ interface CircleProps {
   color?: string;
   borderColor?: string;
   borderWidth?: number;
+  radius?: number;
 }
 
 interface BackroundBarProps {
@@ -69,7 +70,7 @@ export function SemiCircularProgressBar({
   /**
    * Circle
    */
-  const circleRadius = activeBarStrokeWidth / 2;
+  const circleRadius = circle?.radius ?? strokeWidth / 2;
   const circleCoordinates = getCircleCoordinates();
 
   function getCircleCoordinates() {
