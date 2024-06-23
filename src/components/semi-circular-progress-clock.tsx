@@ -9,18 +9,22 @@ interface Rectangle {
   percentage: number;
 }
 
+interface ColorsOptions {
+  fill?: string;
+  activeFill?: string;
+}
+
+interface RectangleOptions {
+  width: number;
+  height: number;
+  count: number;
+  colors?: ColorsOptions;
+}
+
 interface SemiCircularProgressClockProps {
   rangeType?: "range" | "closest";
   percentage: number;
-  rectangleOptions: {
-    width: number;
-    height: number;
-    count: number;
-    colors?: {
-      fill?: string;
-      activeFill?: string;
-    };
-  };
+  rectangleOptions: RectangleOptions;
   canvasWidth: number;
   overflow?: "hidden" | "visible";
 }
@@ -157,4 +161,5 @@ function SemiCircularProgressClock({
   );
 }
 
+export type { SemiCircularProgressClockProps, RectangleOptions, ColorsOptions };
 export default SemiCircularProgressClock;

@@ -1,13 +1,31 @@
-import { SemiCircularProgressBar } from "../semi-circular-progress-bar";
+import SemiCircularProgressBar, {
+  SemiCircularProgressBarProps,
+} from "../semi-circular-progress-bar";
 import SemiCircularProgressClock from "../semi-circular-progress-clock";
+import type { SemiCircularProgressClockProps } from "../semi-circular-progress-clock";
+
+interface ClockOptions
+  extends Omit<SemiCircularProgressClockProps, "percentage"> {
+  positionY?: number;
+}
+
+interface BarOptions
+  extends Omit<
+    SemiCircularProgressBarProps,
+    "percentage" | "overflow" | "canvasWidth"
+  > {}
 
 interface CombinedProgressBarProps {
   percentage: number;
   canvasWidth: number;
+  clockOptions: ClockOptions;
+  barOptions: BarOptions;
 }
 function CombinedProgressBar({
   percentage,
   canvasWidth,
+  clockOptions,
+  barOptions,
 }: CombinedProgressBarProps) {
   return (
     <div
@@ -17,18 +35,7 @@ function CombinedProgressBar({
       }}
     >
       <SemiCircularProgressBar
-        barWidth={30}
-        activeBar={{
-          color: "#246CF9",
-        }}
-        backgroundBar={{
-          color: "#3C4254",
-          shadow: "0px 0px 15px #246CF9",
-        }}
-        circle={{
-          radius: 5,
-          color: "white",
-        }}
+        {...barOptions}
         canvasWidth={canvasWidth}
         percentage={percentage}
         overflow="visible"
@@ -36,25 +43,12 @@ function CombinedProgressBar({
       <div
         style={{
           position: "absolute",
-          transform: "translate(-50%, 0)",
+          transform: "translate(-50%, 0%)",
           left: "50%",
-          bottom: "0",
+          bottom: `${clockOptions?.positionY ?? 0}%`,
         }}
       >
-        <SemiCircularProgressClock
-          canvasWidth={canvasWidth / 1.6}
-          rectangleOptions={{
-            width: 2,
-            height: 4,
-            count: 27,
-            colors: {
-              fill: "#3C4254",
-              activeFill: "#FFFFFF",
-            },
-          }}
-          rangeType="closest"
-          percentage={percentage}
-        />
+        <SemiCircularProgressClock {...clockOptions} percentage={percentage} />
       </div>
     </div>
   );

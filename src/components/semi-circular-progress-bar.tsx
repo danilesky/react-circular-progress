@@ -31,7 +31,7 @@ interface SemiCircularProgressBarProps {
   overflow?: "hidden" | "visible";
 }
 
-export function SemiCircularProgressBar({
+function SemiCircularProgressBar({
   canvasWidth,
   percentage,
   barWidth,
@@ -159,3 +159,11 @@ export function SemiCircularProgressBar({
     </svg>
   );
 }
+
+export type {
+  SemiCircularProgressBarProps,
+  ActivebarProps,
+  BackroundBarProps,
+  CircleProps,
+};
+export default SemiCircularProgressBar;
