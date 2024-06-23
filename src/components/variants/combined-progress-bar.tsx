@@ -1,3 +1,4 @@
+import { HTMLProps } from "react";
 import SemiCircularProgressBar, {
   SemiCircularProgressBarProps,
 } from "../semi-circular-progress-bar";
@@ -15,17 +16,23 @@ interface BarOptions
     "percentage" | "overflow" | "canvasWidth"
   > {}
 
+interface TextOptions extends HTMLProps<HTMLSpanElement> {
+  positionY?: number;
+}
+
 interface CombinedProgressBarProps {
   percentage: number;
   canvasWidth: number;
   clockOptions: ClockOptions;
   barOptions: BarOptions;
+  textOptions: TextOptions;
 }
 function CombinedProgressBar({
   percentage,
   canvasWidth,
   clockOptions,
   barOptions,
+  textOptions,
 }: CombinedProgressBarProps) {
   return (
     <div
@@ -50,6 +57,18 @@ function CombinedProgressBar({
       >
         <SemiCircularProgressClock {...clockOptions} percentage={percentage} />
       </div>
+      <span
+        {...textOptions}
+        style={{
+          ...textOptions?.style,
+          position: "absolute",
+          bottom: `${textOptions?.positionY ?? 0}%`,
+          left: "50%",
+          transform: "translate(-50%, 0%)",
+        }}
+      >
+        {percentage}%
+      </span>
     </div>
   );
 }
