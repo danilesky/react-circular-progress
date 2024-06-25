@@ -1,5 +1,10 @@
 import { ReactElement, SVGProps } from "react";
 
+interface CircleCoordinates {
+  x: number;
+  y: number;
+}
+
 interface BackroundBarProps {
   color?: string;
   variant?: SVGProps<SVGSVGElement>["strokeLinecap"];
@@ -61,7 +66,7 @@ function SemiCircularProgressBar({
     ? strokeWidth - activeBar.offset
     : strokeWidth;
 
-  function percentageToOffset(percentage: number) {
+  function percentageToOffset(percentage: number): number {
     let percentual = percentage;
     if (percentual < 0) {
       percentual = 0;
@@ -78,7 +83,7 @@ function SemiCircularProgressBar({
   const circleRadius = circle?.radius ?? strokeWidth / 2;
   const circleCoordinates = getCircleCoordinates();
 
-  function isCircleHidden() {
+  function isCircleHidden(): boolean {
     if (circle) {
       if (circle?.hidable) {
         if (percentage <= 0) {
@@ -93,7 +98,7 @@ function SemiCircularProgressBar({
     return false;
   }
 
-  function getCircleCoordinates() {
+  function getCircleCoordinates(): CircleCoordinates {
     const angle = (percentage / 100) * 180;
     const radian = (angle * Math.PI) / 180;
 

@@ -1,5 +1,10 @@
 import { ReactElement } from "react";
 
+interface CartesianCoordinates {
+  x: number;
+  y: number;
+}
+
 interface Rectangle {
   x: number;
   y: number;
@@ -44,7 +49,7 @@ function SemiCircularProgressClock({
 
   const rectangles: Array<Rectangle> = Array.from({
     length: rectangleOptions.count,
-  }).map(function (_, i) {
+  }).map((_, i) => {
     const angle = (i * 180) / (rectangleOptions.count - 1) - 90;
 
     const position = polarToCartesian(centerX, centerY, radius, angle);
@@ -64,7 +69,7 @@ function SemiCircularProgressClock({
     centerY: number,
     radius: number,
     angle: number
-  ) {
+  ): CartesianCoordinates {
     const radians = ((angle - 90) * Math.PI) / 180;
 
     return {
@@ -76,7 +81,7 @@ function SemiCircularProgressClock({
   function isActiveClosestRectangle(
     percentage: number,
     currentRectanglePercentage: number
-  ) {
+  ): boolean {
     if (percentage === 0) {
       return false;
     }
@@ -92,9 +97,7 @@ function SemiCircularProgressClock({
 
     let closestNumber = null;
 
-    const checkArray = rectangles.map(function (rect) {
-      return rect.percentage;
-    });
+    const checkArray = rectangles.map((rect) => rect.percentage);
 
     for (let i = 0; i < checkArray.length - 1; i++) {
       if (checkArray[i] < percentage) {
@@ -112,7 +115,7 @@ function SemiCircularProgressClock({
   function isActiveInRangeRectangle(
     percentage: number,
     currentRectanglePercentage: number
-  ) {
+  ): boolean {
     if (percentage === 0) {
       return false;
     }
@@ -129,7 +132,7 @@ function SemiCircularProgressClock({
     return Math.floor(percentage) >= currentRectanglePercentage;
   }
 
-  function fillByRangeType(rect: Rectangle) {
+  function fillByRangeType(rect: Rectangle): string {
     if (rangeType === "range") {
       return isActiveInRangeRectangle(percentage, rect.percentage)
         ? rect.activeFill
@@ -142,21 +145,19 @@ function SemiCircularProgressClock({
 
   return (
     <svg width={width} height={height} overflow={overflow}>
-      {rectangles.map(function (rect, index) {
-        return (
-          <rect
-            key={index}
-            x={rect.x}
-            y={rect.y}
-            width={rectangleOptions.width}
-            height={rectangleOptions.height}
-            transform={rect.transform}
-            style={{
-              fill: fillByRangeType(rect),
-            }}
-          />
-        );
-      })}
+      {rectangles.map((rect, index) => (
+        <rect
+          key={index}
+          x={rect.x}
+          y={rect.y}
+          width={rectangleOptions.width}
+          height={rectangleOptions.height}
+          transform={rect.transform}
+          style={{
+            fill: fillByRangeType(rect),
+          }}
+        />
+      ))}
     </svg>
   );
 }

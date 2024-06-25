@@ -4,7 +4,7 @@ import CombinedProgressBar from "./components/variants/combined-progress-bar";
 function Playground(): ReactElement {
   const [percentage, setPercentage] = useState(0);
 
-  const previewColors = ["#246CF9", "#30E0A1", "#FA2256"];
+  const previewColors: Array<string> = ["#246CF9", "#30E0A1", "#FA2256"];
 
   function percentageHandler(e: React.ChangeEvent<HTMLInputElement>) {
     setPercentage(Number(e.target.value));
@@ -38,7 +38,6 @@ function Playground(): ReactElement {
               circle: {
                 radius: 2,
                 color: "white",
-                hidable: true,
               },
             }}
             clockOptions={{
