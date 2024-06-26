@@ -2,11 +2,11 @@ import { ReactElement, useState } from "react";
 import CombinedProgressBar from "./components/variants/combined-progress-bar";
 
 function Playground(): ReactElement {
-  const [percentage, setPercentage] = useState(0);
+  const [percentage, setPercentage] = useState<number>(0);
 
   const previewColors: Array<string> = ["#246CF9", "#30E0A1", "#FA2256"];
 
-  function percentageHandler(e: React.ChangeEvent<HTMLInputElement>) {
+  function percentageHandler(e: React.ChangeEvent<HTMLInputElement>): void {
     setPercentage(Number(e.target.value));
   }
 
@@ -21,7 +21,7 @@ function Playground(): ReactElement {
         min="0"
         max="100"
       />
-      {previewColors.map(function (color) {
+      {previewColors.map((color) => {
         return (
           <CombinedProgressBar
             percentage={percentage}
