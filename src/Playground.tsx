@@ -1,5 +1,7 @@
-import { ReactElement, useState } from "react";
+import { CSSProperties, ReactElement, useState } from "react";
 import CombinedProgressBar from "./components/variants/combined-progress-bar";
+import SemiCircularProgressBar from "./components/semi-circular-progress-bar";
+import SemiCircularProgressClock from "./components/semi-circular-progress-clock";
 
 function Playground(): ReactElement {
   const [percentage, setPercentage] = useState<number>(0);
@@ -21,8 +23,8 @@ function Playground(): ReactElement {
         min="0"
         max="100"
       />
-      {previewColors.map((color) => {
-        return (
+      <div style={styles.boxWrapper}>
+        {previewColors.map((color) => (
           <CombinedProgressBar
             percentage={percentage}
             canvasWidth={120}
@@ -63,10 +65,76 @@ function Playground(): ReactElement {
               },
             }}
           />
-        );
-      })}
+        ))}
+      </div>
+      <div style={styles.boxWrapper}>
+        {previewColors.map((color) => (
+          <SemiCircularProgressBar
+            canvasWidth={120}
+            percentage={percentage}
+            barWidth={20}
+            activeBar={{
+              color: color,
+            }}
+            backgroundBar={{
+              color: "#3C4254",
+            }}
+            circle={{
+              radius: 5,
+              color: "white",
+            }}
+          />
+        ))}
+      </div>
+      <div style={styles.boxWrapper}>
+        {previewColors.map((color) => (
+          <SemiCircularProgressClock
+            canvasWidth={120}
+            percentage={percentage}
+            rangeType={"range"}
+            rectangleOptions={{
+              width: 3,
+              height: 10,
+              count: 27,
+              colors: {
+                fill: "#3C4254",
+                activeFill: color,
+              },
+            }}
+            overflow="visible"
+          />
+        ))}
+      </div>
+      <div style={styles.boxWrapper}>
+        {previewColors.map((color) => (
+          <SemiCircularProgressClock
+            canvasWidth={120}
+            percentage={percentage}
+            rangeType={"closest"}
+            rectangleOptions={{
+              width: 2,
+              height: 10,
+              count: 21,
+              colors: {
+                fill: "#3C4254",
+                activeFill: color,
+              },
+            }}
+            overflow="visible"
+          />
+        ))}
+      </div>
     </>
   );
 }
+
+const styles: { [key: string]: CSSProperties } = {
+  boxWrapper: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: "10px",
+  },
+};
 
 export default Playground;
