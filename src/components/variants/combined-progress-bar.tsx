@@ -1,9 +1,8 @@
 import { HTMLProps } from "react";
-import SemiCircularProgressBar, {
-  SemiCircularProgressBarProps,
-} from "../semi-circular-progress-bar";
+import SemiCircularProgressBar from "../semi-circular-progress-bar";
 import SemiCircularProgressClock from "../semi-circular-progress-clock";
 import type { SemiCircularProgressClockProps } from "../semi-circular-progress-clock";
+import type { SemiCircularProgressBarProps } from "../semi-circular-progress-bar";
 
 interface ClockOptions
   extends Omit<SemiCircularProgressClockProps, "percentage"> {
